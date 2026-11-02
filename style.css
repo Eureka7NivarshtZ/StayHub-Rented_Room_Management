@@ -1,0 +1,22 @@
+:root{--navy:#10213d;--blue:#2563eb;--pale:#eff6ff;--ink:#172033;--muted:#64748b;--line:#e5eaf2}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#f8fafc}
+.nav{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(6vw,24px)}
+.brand{font-weight:800;font-size:22px;color:var(--navy);letter-spacing:-.5px}.brand span{color:var(--blue)}
+.nav small{color:var(--muted);font-size:13px}
+.hero{background:linear-gradient(125deg,#10213d,#183e70);color:white;padding:86px max(8vw,24px) 92px}
+.tag{display:inline-block;background:#ffffff1c;border:1px solid #ffffff35;padding:8px 13px;border-radius:30px;font-size:12px;letter-spacing:.5px}
+h1{font-size:clamp(36px,5vw,58px);line-height:1.1;max-width:760px;margin:24px 0 18px;letter-spacing:-1.5px}
+.hero p{max-width:650px;color:#d5e2f5;font-size:17px;line-height:1.7;margin:0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-block;text-decoration:none;padding:13px 19px;border-radius:9px;font-weight:700;font-size:14px}
+.primary{background:#fff;color:var(--navy)}.secondary{border:1px solid #ffffff70;color:white}
+main{max-width:1100px;margin:-30px auto 70px;padding:0 22px;position:relative}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:white;border:1px solid var(--line);border-radius:15px;padding:24px;box-shadow:0 10px 30px #10213d0b}
+.icon{width:42px;height:42px;border-radius:12px;background:var(--pale);display:grid;place-items:center;font-size:20px}
+h2{font-size:24px;margin:45px 0 16px;color:var(--navy)}h3{font-size:17px;margin:17px 0 8px}
+.card p,.about p{font-size:14px;line-height:1.7;color:var(--muted);margin:0}
+.about{background:white;border:1px solid var(--line);border-radius:15px;padding:28px;margin-top:26px}
+.status{display:inline-block;margin-top:18px;padding:7px 11px;border-radius:20px;background:#fff7ed;color:#c2410c;font-size:12px;font-weight:700}
+footer{text-align:center;padding:26px;color:#94a3b8;font-size:12px;border-top:1px solid var(--line);background:white}
+@media(max-width:700px){.cards{grid-template-columns:1fr}.hero{padding-top:65px;padding-bottom:75px}.nav small{display:none}}
