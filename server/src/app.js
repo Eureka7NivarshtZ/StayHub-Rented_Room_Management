@@ -8,7 +8,12 @@ import invoiceRoutes from "./routes/invoiceRoutes.js";
 import utilityRoutes from "./routes/utilityRoutes.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 const app = express();
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+const cors = require('cors');
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:5173",
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.get("/api/health", (_req, res) =>
   res.json({ success: true, message: "StayHub API is running" }),
