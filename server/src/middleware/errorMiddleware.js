@@ -1,0 +1,1 @@
+export default function errorMiddleware(err,_req,res,_next){console.error(err);res.status(err.status||500).json({message:err.status?err.message:"Đã xảy ra lỗi từ máy chủ."})}

@@ -1,0 +1,481 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
+
+$navy: #0b1a33;
+$blue: #2563eb;
+$ink: #172033;
+$muted: #5b6678;
+$line: #e3e8f0;
+$paper: #f6f8fc;
+$green: #0f9d6e;
+$amber: #d98a0b;
+
+.lp {
+  font-family: "Be Vietnam Pro", Inter, Arial, sans-serif;
+  color: $ink;
+  background: #fff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  ol {
+    margin: 0;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid rgba($blue, 0.45);
+    outline-offset: 2px;
+  }
+}
+
+.lp-wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+.lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $line;
+}
+
+.lp-header-inner {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.lp-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 18px;
+  color: $navy;
+  text-decoration: none;
+}
+
+.lp-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 800;
+  background: $blue;
+}
+
+.lp-nav {
+  display: flex;
+  gap: 24px;
+  margin-right: auto;
+
+  a {
+    color: $muted;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      color: $navy;
+    }
+  }
+}
+
+.lp-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lp-login {
+  color: $navy;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+/* ---------- Hero ---------- */
+.lp-hero {
+  padding: 72px 0 88px;
+  background: linear-gradient(180deg, $paper 0%, #fff 100%);
+}
+
+.lp-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.lp-hero-text {
+  h1 {
+    font-size: clamp(32px, 4.4vw, 50px);
+    line-height: 1.18;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: $navy;
+  }
+
+  p {
+    margin-top: 20px;
+    max-width: 52ch;
+    font-size: 17px;
+    color: $muted;
+  }
+}
+
+.lp-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* Bảng phòng */
+.lp-board {
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 18px;
+  box-shadow: 0 24px 48px -24px rgba($navy, 0.28);
+  overflow: hidden;
+}
+
+.lp-board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid $line;
+
+  b {
+    display: block;
+    font-size: 16px;
+  }
+
+  span {
+    font-size: 13px;
+    color: $muted;
+  }
+}
+
+.lp-legend {
+  display: flex;
+  gap: 14px;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: $muted;
+
+  li::before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 6px;
+    border-radius: 3px;
+    background: currentColor;
+  }
+
+  .is-rented::before {
+    color: $green;
+  }
+  .is-empty::before {
+    color: #b8c2d3;
+  }
+  .is-debt::before {
+    color: $amber;
+  }
+}
+
+.lp-rooms {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 20px;
+}
+
+.lp-room {
+  padding: 12px 12px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  border-left-width: 4px;
+  animation: lp-room-in 0.4s ease both;
+  animation-delay: calc(var(--i) * 60ms);
+
+  b {
+    display: block;
+    font-size: 15px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+
+  &.is-rented {
+    background: #ecfaf4;
+    border-color: #c4eddc;
+    border-left-color: $green;
+    color: #0a6b4a;
+  }
+
+  &.is-empty {
+    background: $paper;
+    border-color: $line;
+    border-left-color: #b8c2d3;
+    color: $muted;
+  }
+
+  &.is-debt {
+    background: #fff6e6;
+    border-color: #fbe2b1;
+    border-left-color: $amber;
+    color: #8a5606;
+  }
+}
+
+@keyframes lp-room-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lp-board-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid $line;
+  background: $paper;
+  font-size: 13px;
+  color: $muted;
+}
+
+.lp-board-debt {
+  font-weight: 700;
+  color: #d92d20;
+}
+
+/* ---------- Sections ---------- */
+.lp-section {
+  padding: 88px 0;
+}
+
+.lp-section-tint {
+  background: $paper;
+}
+
+.lp-section h2,
+.lp-cta h2 {
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: $navy;
+}
+
+.lp-center {
+  text-align: center;
+}
+
+.lp-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.lp-split-head {
+  position: sticky;
+  top: 100px;
+
+  p {
+    margin-top: 16px;
+    color: $muted;
+    max-width: 44ch;
+  }
+}
+
+.lp-features {
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid $line;
+
+    &:last-child {
+      border-bottom: 1px solid $line;
+    }
+  }
+
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 4px;
+    color: $muted;
+  }
+}
+
+.lp-feature-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 19px;
+  color: $blue;
+  background: #eaf1ff;
+}
+
+/* Các bước */
+.lp-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 48px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+  }
+
+  h3 {
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 6px;
+    color: $muted;
+  }
+}
+
+.lp-step-no {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+  background: $navy;
+}
+
+/* ---------- CTA + Footer ---------- */
+.lp-cta {
+  padding: 72px 0;
+  background: $navy;
+}
+
+.lp-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  h2 {
+    max-width: 24ch;
+    color: #fff;
+  }
+}
+
+.lp-cta-btn.ant-btn {
+  font-weight: 600;
+  color: $navy;
+}
+
+.lp-footer {
+  padding: 28px 0;
+  border-top: 1px solid $line;
+  font-size: 14px;
+  color: $muted;
+}
+
+.lp-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .lp-hero {
+    padding: 48px 0 64px;
+  }
+
+  .lp-hero-inner,
+  .lp-split {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .lp-split-head {
+    position: static;
+  }
+
+  .lp-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .lp-section {
+    padding: 64px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .lp-nav {
+    display: none;
+  }
+
+  .lp-header-inner {
+    justify-content: space-between;
+  }
+
+  .lp-rooms {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp {
+    scroll-behavior: auto;
+  }
+
+  .lp-room {
+    animation: none;
+  }
+}

@@ -1,0 +1,92 @@
+name: CI
+ 
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+ 
+# Push mới lên cùng nhánh thì hủy lần chạy cũ đang dở
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+ 
+jobs:
+  client:
+    name: Client (build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+ 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+ 
+      - name: Cài thư viện
+        run: npm ci
+ 
+      - name: Build
+        run: npm run build
+ 
+  server:
+    name: Server (kiểm tra + chạy thử với MySQL)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      PORT: 5000
+      CLIENT_URL: http://localhost:5173
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: stayhub
+      JWT_SECRET: ci-only-secret
+      JWT_EXPIRES_IN: 1d
+    steps:
+      - uses: actions/checkout@v4
+ 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+ 
+      - name: Cài thư viện
+        run: npm ci
+ 
+      - name: Kiểm tra cú pháp toàn bộ file .js
+        run: find server.js src -name "*.js" -print0 | xargs -0 -n1 node --check
+ 
+      - name: Nạp schema và seed vào MySQL
+        working-directory: .
+        run: |
+          mysql --protocol=tcp -h 127.0.0.1 -uroot -proot < database/schema.sql
+          mysql --protocol=tcp -h 127.0.0.1 -uroot -proot < database/seed.sql
+ 
+      - name: Chạy thử server và gọi /api/health
+        run: |
+          node server.js &
+          SERVER_PID=$!
+          curl --fail --silent --show-error \
+            --retry 10 --retry-delay 1 --retry-connrefused \
+            http://localhost:5000/api/health
+          kill $SERVER_PID

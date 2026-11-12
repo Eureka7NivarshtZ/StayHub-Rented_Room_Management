@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+body {
+  font-family: Inter, Arial, sans-serif;
+  color: #172033;
+  background: #f5f7fb;
+}
+.page-heading {
+  margin: 0 0 6px;
+  font-size: 25px;
+  font-weight: 700;
+}
+.page-description {
+  margin: 0 0 24px;
+  color: #667085;
+}
