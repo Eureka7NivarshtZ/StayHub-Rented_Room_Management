@@ -42,11 +42,11 @@ The system follows a model in which one landlord can manage multiple rental prop
 - Monitor and manage the system.
 
 ## 5. Planned Technologies
-- **Frontend:** HTML, CSS, JavaScript, ReactJS.
+- **Frontend:** HTML, SCSS, JavaScript, ReactJS.
 - **Backend:** Node.js, Express.js.
 - **Database:** MySQL.
 - **Version Control:** Git and GitHub.
-- **Deployment:** Vercel.
+- **Deployment:**Frontend: Vercel,Backend + Database: Railway.
 
 ## 6. Project Structure
 *The project structure will be updated throughout the development process.*
